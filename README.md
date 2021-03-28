@@ -12,15 +12,15 @@ Download this repo as .zip or _git clone_ it.
 ## STEP 3:
 Use the main script _lessbian.sh_ as root user:
 
-Before you begin, make directories __apt-cache__ and __logs__. This will allow you to use local cache if you want to build twice and more.
+Before you begin, make directories _apt-cache_ and _log_. This will allow you to use local cache if you want to build twice and more.
 
-* _lessbian.sh r_ - to set or reset all needed assets. It will make two directories _edit_ and _iso_.
-* _lessbian.sh c_ - to do chroot stuff. By default it will install _google-chrome_ into your future ISO. If you want to disable Chrome or install your software, just modify the _my-apps.sh_ script accordingly.
-* _lessbian.sh t_ - this will __prepare your iso to boot from RAM__.
-* _lessbian.sh p_ - this will pack the finall ISO.
-* _lessbian.sh k_ - to test your ISO with KVM (have to be installed).
-* _lessbian.sh d_ - will clean up. It won't delete the directories with __apt-cache__ and __logs__. You have to remove them manually. Do this only if you are happy with your last build.
-* _lessbian.sh rctpdk_ and any combinations also work fine!
+* _`lessbian.sh r`_ - to set or reset all needed assets. It will make two directories _edit_ and _iso_.
+* _`lessbian.sh c`_ - to do chroot stuff. By default it will install _google-chrome-stable_ into your future ISO. If you want to disable Chrome or install your software, just modify the _`my-apps.sh`_ script accordingly.
+* _`lessbian.sh t`_ - this will __prepare your iso to boot from RAM__.
+* _`lessbian.sh p`_ - this will pack the finall ISO.
+* _`lessbian.sh k`_ - to test your ISO with KVM (have to be installed).
+* _`lessbian.sh d`_ - will clean up. It won't delete the directories with _apt-cache_ and _log_. You have to remove them manually. Do this only if you are happy with your last build.
+* _`lessbian.sh rctpdk`_ and any combinations also work fine!
 
 ## Step 4:
 Enjoy and ...
