@@ -11,7 +11,7 @@ function lchroot(){
  mount -B /dev edit/dev; mount -B /sys edit/sys; mount -B /proc edit/proc; mount -B /run edit/run; sleep 1
  if [ -f my-apps.sh ]; then cp my-apps.sh edit/; fi
  cp inchroot.sh edit/; chroot edit bash inchroot.sh
- rm -rf edit/chroot-./script.sh; rm -rf edit/etc/resolv.conf; sleep 1
+ rm -rf edit/inchroot.sh; rm -rf edit/etc/resolv.conf; sleep 1
  umount $PWD/edit/dev; umount $PWD/edit/sys; umount $PWD/edit/proc; umount $PWD/edit/run; sleep 1
  umount $PWD/edit/var/log; umount $PWD/edit/var/cache/apt/archives;}
 
