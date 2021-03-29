@@ -4,6 +4,7 @@
 
 apt-get update
 apt-get -y install gnome-session
+apt-get -y install gnome-terminal
 apt-get -y install gnome-disk-utility
 
 if [ -f my-apps.sh ]; then . my-apps.sh; fi
