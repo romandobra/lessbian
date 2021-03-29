@@ -7,7 +7,7 @@ Based on https://github.com/head-on-a-stick/newer-buster.
 # How to boot Debian to RAM
 > For those who don't want to build it themselves, here's the link to [download Debian desktop ISO that boots from RAM](https://github.com/undecoded/lessbian/releases/).
 ## STEP 1:
-Download the ISO [here](https://github.com/Head-on-a-Stick/newer-buster/releases) (no desktop).
+Download the base ISO [here](https://github.com/Head-on-a-Stick/newer-buster/releases) (no desktop).
 ## STEP 2:
 Download this repo as .zip or _git clone_ it.
 ## STEP 3:
