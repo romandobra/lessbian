@@ -6,7 +6,6 @@ Based on https://github.com/head-on-a-stick/newer-buster.
 
 # How to boot Debian to RAM
 > For those who don't want to build it themselves, here's the link to [download Debian desktop ISO that boots from RAM](https://github.com/undecoded/lessbian/releases/).
-> If you want to add your apps into your LiveCD, just put 'apt-get' commands in the `my-apps.sh` file before you run the main script. If you want to have custom autostart commands when the desktop is loaded, just put them in `lessbian-autostart.sh`.
 ## STEP 1:
 Download the base ISO [here](https://github.com/Head-on-a-Stick/newer-buster/releases) (no desktop).
 ## STEP 2:
@@ -22,6 +21,7 @@ Download this repo as .zip or _git clone_ it.
 * _`lessbian.sh k`_ - to test your ISO with KVM (have to be installed).
 * _`lessbian.sh d`_ - will clean up _(It won't delete the directories `apt-cache` and `log`. You have to remove them manually. Do this only if you are happy with your last build)_.
 * _`lessbian.sh rctapdk`_ and any combinations also work fine!
+> If you want to add your apps into your LiveCD, just put 'apt-get' commands in the `my-apps.sh` file before you run the main script. If you want to have custom autostart commands when the desktop is loaded, just put them in `lessbian-autostart.sh`.
 ## Step 4:
 Enjoy and ...
 # Give a star to this repo!
