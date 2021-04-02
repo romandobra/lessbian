@@ -16,8 +16,7 @@ function lchroot(){
  umount $PWD/edit/var/log; umount $PWD/edit/var/cache/apt/archives;}
 
 function lautostart(){
-mkdir -p iso/live/config-hooks/; cp lessbian-hooks.sh iso/live/config-hooks/
-cp lessbian-autostart.sh edit/usr/bin/lessbian-autostart; chmod +x edit/usr/bin/lessbian-autostart;}
+mkdir -p iso/live/config-hooks/; cp lessbian-hooks.sh iso/live/config-hooks/;}
 
 function ltoram(){
 rm -rf edit/usr/share/doc/*; rm -rf edit/usr/share/help/*; rm -rf edit/usr/share/locale/*
