@@ -4,7 +4,8 @@ It is less Debian - LESSBIAN.
 Gnome desktop into live boot ISO. No bloatware. Fresh drivers.
 
 # Going 2.0
-Soon...
+Soon.
+* [v 1.1](https://github.com/romandobra/lessbian/tree/1.1)
 
 Enjoy and ...
 # Give a star to this repo!
