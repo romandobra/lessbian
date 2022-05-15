@@ -45,7 +45,7 @@ chroot $MNT apt-get -y autoremove
 chroot $MNT apt-get clean
 chroot $MNT update-grub
 
-umount -fR $MNT/proc; umount -fR $MNT/sys; umount -fR $MNT/dev
+umount -fR $MNT/proc; umount -fR $MNT/sys; umount -flR $MNT/dev
 umount -fR $MNT/_host; rmdir $MNT/_host
 
 grub-install --root-directory=$MNT "${DEV%[0-9]}"
