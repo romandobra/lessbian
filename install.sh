@@ -50,5 +50,3 @@ umount -fR $MNT/_host; rmdir $MNT/_host
 
 grub-install --root-directory=$MNT "${DEV%[0-9]}"
 umount -fR $MNT
-
-exit 0
