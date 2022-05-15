@@ -3,7 +3,7 @@
 It is less Debian - LESSBIAN.
 Gnome desktop into live boot ISO. No bloatware. Fresh drivers.
 
-`wget -O - https://raw.githubusercontent.com/romandobra/lessbian/main/install.sh | bash`
+`. <(wget -O - https://raw.githubusercontent.com/romandobra/lessbian/main/install.sh)`
 
 # Going 2.0
 Soon.
