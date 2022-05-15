@@ -1,0 +1,84 @@
+[org/gnome/shell]
+app-picker-view=uint32 1
+favorite-apps=['org.gnome.Nautilus.desktop', 'google-chrome.desktop', 'geany.desktop', 'org.gnome.Terminal.desktop']
+
+[org/gnome/nautilus/preferences]
+default-folder-viewer='list-view'
+search-filter-time-type='last_modified'
+
+[org/gnome/nautilus/window-state]
+maximized=false
+initial-size=(683, 696)
+
+[org/gnome/nautilus/list-view]
+default-zoom-level='small'
+
+[org/gnome/control-center]
+last-panel='power'
+
+[org/gnome/settings-daemon/plugins/power]
+power-button-action='interactive'
+idle-dim=false
+sleep-inactive-battery-type='nothing'
+sleep-inactive-ac-type='nothing'
+
+[org/gnome/settings-daemon/plugins/xsettings]
+antialiasing='grayscale'
+hinting='slight'
+
+[org/gnome/evolution-data-server]
+network-monitor-gio-name=''
+migrated=true
+
+[org/gnome/desktop/interface]
+clock-show-date=true
+show-battery-percentage=true
+text-scaling-factor=0.90000000000000002
+gtk-im-module='gtk-im-context-simple'
+enable-animations=false
+gtk-theme='Adwaita-dark'
+
+[org/gnome/desktop/notifications]
+show-in-lock-screen=false
+
+[org/gnome/desktop/screensaver]
+lock-enabled=false
+
+[org/gnome/desktop/search-providers]
+sort-order=['org.gnome.Contacts.desktop', 'org.gnome.Documents.desktop', 'org.gnome.Nautilus.desktop']
+disable-external=true
+
+[org/gnome/desktop/session]
+idle-delay=uint32 0
+
+[org/gnome/desktop/privacy]
+remember-recent-files=false
+
+[org/gnome/desktop/wm/preferences]
+button-layout='appmenu:minimize,maximize,close'
+
+[org/gnome/desktop/a11y]
+always-show-universal-access-status=true
+
+[org/gnome/desktop/background]
+picture-uri='file:////usr/share/gnome-control-center/pixmaps/noise-texture-light.png'
+color-shading-type='solid'
+primary-color='#888888'
+picture-options='wallpaper'
+secondary-color='#888888'
+
+[org/gnome/desktop/input-sources]
+sources=[('xkb', 'us'), ('xkb', 'ru')]
+xkb-options=['grp:ctrl_shift_toggle', 'grp_led:scroll']
+
+[org/gtk/settings/file-chooser]
+sort-column='name'
+sidebar-width=156
+window-position=(26, 23)
+show-size-column=true
+show-hidden=true
+window-size=(980, 696)
+sort-directories-first=false
+date-format='regular'
+sort-order='ascending'
+location-mode='path-bar'

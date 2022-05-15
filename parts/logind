@@ -1,0 +1,12 @@
+[Login]
+HandlePowerKey=poweroff
+HandleSuspendKey=poweroff
+HandleHibernateKey=poweroff
+HandleLidSwitch=poweroff
+HandleLidSwitchExternalPower=poweroff
+HandleLidSwitchDocked=poweroff
+PowerKeyIgnoreInhibited=yes
+SuspendKeyIgnoreInhibited=yes
+HibernateKeyIgnoreInhibited=yes
+LidSwitchIgnoreInhibited=yes
+IdleAction=ignore
