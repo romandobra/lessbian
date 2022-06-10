@@ -1,8 +1,10 @@
-# Debian Bullseye
-#deb http://deb.debian.org/debian/ bullseye main contrib non-free
 
-# bullseye-backports
-echo 'deb http://deb.debian.org/debian bullseye-backports main contrib non-free' >> /etc/apt/sources.list
+#Version 470.103.01
+#echo 'deb http://deb.debian.org/debian bullseye-backports main contrib non-free' >> /etc/apt/sources.list
+#apt update
+#apt -y install -t bullseye-backports nvidia-driver firmware-misc-nonfree
 
+
+#Version 460.91.03
 apt update
-apt -y install -t bullseye-backports nvidia-driver firmware-misc-nonfree
+apt -y install nvidia-driver firmware-misc-nonfree
