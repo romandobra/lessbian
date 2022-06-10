@@ -17,7 +17,7 @@ source settings.sh
 
 COUNTER=0
 for i in $PARTS; do
-  let "COUNTER+=1"
+  let "COUNTER+=5"
   wget -O custom-$(printf "%02d\n" $COUNTER)-${i}.sh $LESSBIAN/parts/${i}.sh
 done || true
 
