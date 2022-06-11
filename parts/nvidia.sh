@@ -7,4 +7,4 @@
 
 #Version 460.91.03
 apt update
-apt -y install nvidia-driver firmware-misc-nonfree libnvidia-encode1
+apt -y install nvidia-driver firmware-misc-nonfree # libnvidia-encode1
