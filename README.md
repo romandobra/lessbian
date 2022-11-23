@@ -1,4 +1,4 @@
-# Debian LiveCD toram. Skinny desktop with the latest drivers
+# Lessbian - Debian LiveCD toram
 The power of Debian. Nothing more. Less Debian - LESSBIAN.
 Gnome desktop into live boot ISO. No bloatware. Fresh drivers.
 
