@@ -1,6 +1,6 @@
 # Lessbian - Debian LiveCD toram
 The power of Debian. Nothing more. Less Debian - LESSBIAN.
-Gnome desktop into live boot ISO. No bloatware. Fresh drivers.
+Gnome desktop, live boot. No bloatware. Fresh drivers.
 
 ## Motivation:
 I wanted a Linux system that:
