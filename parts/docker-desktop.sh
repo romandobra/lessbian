@@ -14,5 +14,9 @@ echo \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
+curl -sS --output docker.deb https://desktop.docker.com/linux/main/amd64/docker-desktop-4.18.0-amd64.deb
+
 sudo apt-get update
-sudo apt-get -y install docker-desktop
+sudo apt-get -y install docker.deb
+
+sudo rm docker.deb
