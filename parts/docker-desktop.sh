@@ -20,3 +20,5 @@ sudo apt-get update
 sudo apt-get -y install ./docker.deb
 
 sudo rm docker.deb
+
+sudo usermod -aG docker 1000
