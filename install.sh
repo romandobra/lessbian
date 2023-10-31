@@ -43,7 +43,8 @@ done || true
 
 chroot $MNT apt-get -y autoremove
 chroot $MNT apt-get clean
-chroot $MNT update-grub
+chroot grub-mkconfig -o /boot/grub/grub.cfg
+#chroot $MNT update-grub
 
 umount -fR $MNT/proc; umount -fR $MNT/sys; umount -flR $MNT/dev
 umount -fR $MNT/_host; rmdir $MNT/_host
