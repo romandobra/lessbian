@@ -3,7 +3,7 @@
 set -e
 (debootstrap --help; wget --help; chroot --help) > /dev/null
 
-DIST=bullseye; MNT="$(date +%s)-$DIST"; mkdir -p $MNT
+DIST=bookworm; MNT="$(date +%s)-$DIST"; mkdir -p $MNT
 
 debootstrap --arch amd64 $DIST $MNT https://deb.debian.org/debian/
 
