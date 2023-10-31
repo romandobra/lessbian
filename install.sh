@@ -41,6 +41,7 @@ for i in custom*; do
   rm $MNT/s
 done || true
 
+chroot $MNT apt-get -y install grub2
 chroot $MNT apt-get -y autoremove
 chroot $MNT apt-get clean
 chroot grub-mkconfig -o /boot/grub/grub.cfg
