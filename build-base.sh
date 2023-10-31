@@ -7,12 +7,12 @@ DIST=bullseye; MNT="$(date +%s)-$DIST"; mkdir -p $MNT
 
 debootstrap --arch amd64 $DIST $MNT https://deb.debian.org/debian/
 
-echo 'deb https://deb.debian.org/debian bullseye main contrib non-free
-deb-src https://deb.debian.org/debian bullseye main contrib non-free
-deb https://deb.debian.org/debian bullseye-updates main contrib non-free
-deb-src https://deb.debian.org/debian bullseye-updates main contrib non-free
-deb https://security.debian.org/debian-security bullseye-security main
-' > $MNT/etc/apt/sources.list
+echo "deb https://deb.debian.org/debian $DIST main contrib non-free
+deb-src https://deb.debian.org/debian $DIST main contrib non-free
+deb https://deb.debian.org/debian $DIST-updates main contrib non-free
+deb-src https://deb.debian.org/debian $DIST-updates main contrib non-free
+deb https://security.debian.org/debian-security $DIST-security main
+" > $MNT/etc/apt/sources.list
 
 function _build(){
   cat - > $MNT/_script
