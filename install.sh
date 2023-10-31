@@ -44,7 +44,7 @@ done || true
 chroot $MNT apt-get -y install grub2
 chroot $MNT apt-get -y autoremove
 chroot $MNT apt-get clean
-chroot grub-mkconfig -o /boot/grub/grub.cfg
+chroot $MNT grub-mkconfig -o /boot/grub/grub.cfg
 #chroot $MNT update-grub
 
 umount -fR $MNT/proc; umount -fR $MNT/sys; umount -flR $MNT/dev
