@@ -3,15 +3,19 @@
 set -e
 (debootstrap --help; wget --help; chroot --help) > /dev/null
 
-#DIST=bookworm; MNT="$(date +%s)-$DIST"; mkdir -p $MNT
-DIST=bullseye; MNT="$(date +%s)-$DIST"; mkdir -p $MNT
+DIST=bullseye; NF_COMPONENT="non-free"
+#DIST=bookworm; NF_COMPONENT="non-free non-free-firmware"
+
+COMPONENTS="main contrib $NF_COMPONENT"
+
+MNT="$(date +%s)-$DIST"; mkdir -p $MNT
 
 debootstrap --arch amd64 $DIST $MNT https://deb.debian.org/debian/
 
-echo "deb https://deb.debian.org/debian $DIST main contrib non-free
-deb-src https://deb.debian.org/debian $DIST main contrib non-free
-deb https://deb.debian.org/debian $DIST-updates main contrib non-free
-deb-src https://deb.debian.org/debian $DIST-updates main contrib non-free
+echo "deb https://deb.debian.org/debian $DIST $COMPONENTS
+deb-src https://deb.debian.org/debian $DIST $COMPONENTS
+deb https://deb.debian.org/debian $DIST-updates $COMPONENTS
+deb-src https://deb.debian.org/debian $DIST-updates $COMPONENTS
 deb https://security.debian.org/debian-security $DIST-security main
 " > $MNT/etc/apt/sources.list
 
