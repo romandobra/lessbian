@@ -40,7 +40,7 @@ mount -t proc /proc $MNT/proc; mount -t sysfs /sys $MNT/sys; mount -B /dev $MNT/
 {
   echo -n '#INSTALL '
   date +%s
-  env | grep LESSBIAN_
+  ( set -o posix; set ) | grep LESSBIAN
   echo
 } > $MNT/etc/lessbian-env
 

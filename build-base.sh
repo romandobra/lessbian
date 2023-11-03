@@ -33,7 +33,7 @@ function _build(){
 {
   echo -n '#BASE '
   date +%s
-  env | grep LESSBIAN_
+  ( set -o posix; set ) | grep LESSBIAN
   echo
 } > $MNT/etc/lessbian-env
 
