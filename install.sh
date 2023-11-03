@@ -3,22 +3,24 @@
 set -e
 (grub-install --help; wget --help; chroot --help) > /dev/null
 
-export LESSBIAN='https://raw.githubusercontent.com/romandobra/lessbian/main'
+export LESSBIAN_GIT='https://raw.githubusercontent.com/romandobra/lessbian/main'
 
 if [ ! -f settings.sh ]; then
   echo
   echo 'File settings.sh not found.'
   echo 'Download it from (leave empty to exit):'
-  read -p "$LESSBIAN/settings/***.sh: "
+  read -p "$LESSBIAN_GIT/settings/***.sh: "
   if [[ "x$REPLY" == "x" ]]; then exit 1; fi
-  wget -O settings.sh $LESSBIAN/settings/${REPLY}.sh || exit 2
+  wget -O settings.sh $LESSBIAN_GIT/settings/${REPLY}.sh || exit 2
 fi
 source settings.sh
+LESSBIAN_BASE=$BASE
+LESSBIAN_PARTS=$PARTS
 
 COUNTER=0
-for i in $PARTS; do
+for i in $LESSBIAN_PARTS; do
   let "COUNTER+=5"
-  wget -O custom-$(printf "%02d\n" $COUNTER)-${i}.sh $LESSBIAN/parts/${i}.sh
+  wget -O custom-$(printf "%02d\n" $COUNTER)-${i}.sh $LESSBIAN_GIT/parts/${i}.sh
 done || true
 
 echo "settings.sh and custom-***.sh files are downloaded."
@@ -27,13 +29,20 @@ read -p "Review them if needed and press Enter to install"
 ls -la /dev/disk/by-id; read -p "DEV=/dev/" DEV; DEV="/dev/$DEV"
 read -p "Mount to [/mnt]: " MNT; MNT=${MNT:-/mnt}
 
-if [ ! -f ${BASE}.tar.gz ]; then wget https://github.com/romandobra/lessbian/releases/download/v2.0/${BASE}.tar.gz; fi
+if [ ! -f ${LESSBIAN_BASE}.tar.gz ]; then wget https://github.com/romandobra/lessbian/releases/download/v2.0/${LESSBIAN_BASE}.tar.gz; fi
 
 mkdir -p $MNT; mount $DEV $MNT
-cat ${BASE}.tar.gz | tar xzf - -C $MNT
+cat ${LESSBIAN_BASE}.tar.gz | tar xzf - -C $MNT
 
 mkdir $MNT/_host; mount -B / $MNT/_host
 mount -t proc /proc $MNT/proc; mount -t sysfs /sys $MNT/sys; mount -B /dev $MNT/dev
+
+{
+  echo -n '#INSTALL '
+  date +%s
+  env | grep LESSBIAN_
+  echo
+} > $MNT/etc/lessbian-env
 
 for i in custom*; do
   cp $i $MNT/s

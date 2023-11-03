@@ -3,20 +3,20 @@
 set -e
 (debootstrap --help; wget --help; chroot --help) > /dev/null
 
-DIST=bullseye; NF_COMPONENT="non-free"
-#DIST=bookworm; NF_COMPONENT="non-free non-free-firmware"
+LESSBIAN_DIST=bullseye; LESSBIAN_NF_COMPONENT="non-free"
+#LESSBIAN_DIST=bookworm; LESSBIAN_NF_COMPONENT="non-free non-free-firmware"
 
-COMPONENTS="main contrib $NF_COMPONENT"
+LESSBIAN_COMPONENTS="main contrib $LESSBIAN_NF_COMPONENT"
 
-MNT="$(date +%s)-$DIST"; mkdir -p $MNT
+MNT="$(date +%s)-$LESSBIAN_DIST"; mkdir -p $MNT
 
-debootstrap --arch amd64 $DIST $MNT https://deb.debian.org/debian/
+debootstrap --arch amd64 $LESSBIAN_DIST $MNT https://deb.debian.org/debian/
 
-echo "deb https://deb.debian.org/debian $DIST $COMPONENTS
-deb-src https://deb.debian.org/debian $DIST $COMPONENTS
-deb https://deb.debian.org/debian $DIST-updates $COMPONENTS
-deb-src https://deb.debian.org/debian $DIST-updates $COMPONENTS
-deb https://security.debian.org/debian-security $DIST-security main
+echo "deb https://deb.debian.org/debian $LESSBIAN_DIST $LESSBIAN_COMPONENTS
+deb-src https://deb.debian.org/debian $LESSBIAN_DIST $LESSBIAN_COMPONENTS
+deb https://deb.debian.org/debian $LESSBIAN_DIST-updates $LESSBIAN_COMPONENTS
+deb-src https://deb.debian.org/debian $LESSBIAN_DIST-updates $LESSBIAN_COMPONENTS
+deb https://security.debian.org/debian-security $LESSBIAN_DIST-security main
 " > $MNT/etc/apt/sources.list
 
 function _build(){
@@ -29,6 +29,13 @@ function _build(){
   rm -rf $MNT/_script
   DIR=$(pwd); cd $MNT && tar czf ../${1}.tar.gz . && cd $DIR
 }
+
+{
+  echo -n '#BASE '
+  date +%s
+  env | grep LESSBIAN_
+  echo
+} > $MNT/etc/lessbian-env
 
 _build NOX << EOF
 passwd -d root
