@@ -3,7 +3,7 @@
 set -e
 (grub-install --help; wget --help; chroot --help) > /dev/null
 
-export LESSBIAN_GIT='https://raw.githubusercontent.com/romandobra/lessbian/main'
+export LESSBIAN_GIT='https://raw.githubusercontent.com/romandobra/bookworm/main'
 
 if [ ! -f settings.sh ]; then
   echo
@@ -29,7 +29,7 @@ read -p "Review them if needed and press Enter to install"
 ls -la /dev/disk/by-id; read -p "DEV=/dev/" DEV; DEV="/dev/$DEV"
 read -p "Mount to [/mnt]: " MNT; MNT=${MNT:-/mnt}
 
-if [ ! -f ${LESSBIAN_BASE}.tar.gz ]; then wget https://github.com/romandobra/lessbian/releases/download/v2.0/${LESSBIAN_BASE}.tar.gz; fi
+if [ ! -f ${LESSBIAN_BASE}.tar.gz ]; then wget https://github.com/romandobra/lessbian/releases/download/bookworm/${LESSBIAN_BASE}.tar.gz; fi
 
 mkdir -p $MNT; mount $DEV $MNT
 cat ${LESSBIAN_BASE}.tar.gz | tar xzf - -C $MNT
