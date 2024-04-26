@@ -3,8 +3,8 @@
 set -e
 (debootstrap --help; wget --help; chroot --help) > /dev/null
 
-LESSBIAN_DIST=bullseye; LESSBIAN_NF_COMPONENT="non-free"
-#LESSBIAN_DIST=bookworm; LESSBIAN_NF_COMPONENT="non-free non-free-firmware"
+#LESSBIAN_DIST=bullseye; LESSBIAN_NF_COMPONENT="non-free"
+LESSBIAN_DIST=bookworm; LESSBIAN_NF_COMPONENT="non-free non-free-firmware"
 
 LESSBIAN_COMPONENTS="main contrib $LESSBIAN_NF_COMPONENT"
 
@@ -41,7 +41,7 @@ _build NOX << EOF
 passwd -d root
 apt-get update
 apt-get -y install localepurge
-apt-get -y install linux-image-amd64 grub2 firmware-linux
+apt-get -y install linux-image-amd64 grub2 firmware-linux initramfs-tools
 tasksel install standard laptop
 EOF
 
