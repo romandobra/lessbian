@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 set -e
+
+apt-get -y install debootstrap wget chroot
+
 (debootstrap --help; wget --help; chroot --help) > /dev/null
 
 LESSBIAN_DIST=bullseye; LESSBIAN_NF_COMPONENT="non-free"
