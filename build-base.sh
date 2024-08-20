@@ -43,17 +43,19 @@ function _build(){
 
 _build NOX << EOF
 passwd -d root
+export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get -y install localepurge
-apt-get -y install linux-image-amd64 grub2 firmware-linux
+apt-get -yq install localepurge
+apt-get -yq install linux-image-amd64 grub2 firmware-linux
 tasksel install standard laptop
 EOF
 
 _build X << EOF
-#apt-get -y install gnome-session-flashback
-apt-get -y install gnome-session
-apt-get -y --purge remove plymouth
-apt-get --no-install-recommends -y install gnome-terminal sudo
+export DEBIAN_FRONTEND=noninteractive
+#apt-get -yq install gnome-session-flashback
+apt-get -yq install gnome-session
+apt-get -yq --purge remove plymouth
+apt-get --no-install-recommends -yq install gnome-terminal sudo
 adduser --disabled-password --gecos "" user
 passwd -d user
 adduser user sudo
