@@ -2,6 +2,7 @@
 
 set -e
 
+apt-get update
 apt-get -y install debootstrap wget chroot
 
 (debootstrap --help; wget --help; chroot --help) > /dev/null
