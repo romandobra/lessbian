@@ -1,5 +1,6 @@
 name: list-variants
 on:
+  push:
   workflow_dispatch:
 
 jobs:
