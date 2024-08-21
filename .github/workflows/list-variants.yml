@@ -29,7 +29,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add .
           git status | grep modified
-          [ $? -eq 0 ] && git commit -a -m "Add changes"
+          [ $? -eq 0 ] || git commit -a -m "Add changes"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
