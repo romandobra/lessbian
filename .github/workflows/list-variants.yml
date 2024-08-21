@@ -1,6 +1,8 @@
 name: list-variants
 on:
   push:
+    paths:
+      - 'variants/**'
   workflow_dispatch:
 
 jobs:
