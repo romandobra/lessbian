@@ -27,8 +27,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add variants/keywords/.
-          git commit -a -m "Add changes"
+          git add .
+          git status | grep modified && git commit -a -m "Add changes"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
