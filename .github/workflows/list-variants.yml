@@ -1,4 +1,4 @@
-name: list-variants
+name: Update variants
 on:
   push:
     paths:
