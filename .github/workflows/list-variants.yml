@@ -18,7 +18,7 @@ jobs:
           mkdir -p keywords
           rm -rf keywords/*
           ls *.sh | cut -d'.' -f1 | tr '-' '\n' | sort -u > keywords/_list
-          cat keywords/_list.txt | (while read w; do ls *.sh | grep -sw $w >> keywords/$w; done;)
+          cat keywords/_list | (while read w; do ls *.sh | grep -sw $w >> keywords/$w; done;)
 
       - name: Commit files
         run: |
