@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 set -e
+
+apt-get -qq update
+apt-get -yqq install debootstrap
+
 (grub-install --help; wget --help; chroot --help) > /dev/null
 
 export LESSBIAN_GIT='https://raw.githubusercontent.com/romandobra/lessbian/main'
