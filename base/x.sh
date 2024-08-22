@@ -1,4 +1,3 @@
-export DEBIAN_FRONTEND=noninteractive
 #apt-get -yq install gnome-session-flashback
 apt-get -yq install gnome-session
 apt-get -yq --purge remove plymouth
