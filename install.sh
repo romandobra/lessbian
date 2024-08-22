@@ -27,7 +27,7 @@ exit_script(){
 run_in_chroot(){
   local script="$LESSBIAN_MOUNT_TARGET/chroot_script.sh"
   {
-    echo "echo Running $1 in chroot && export DEBIAN_FRONTEND=noninteractive"
+    echo "echo Running '$1' in chroot && export DEBIAN_FRONTEND=noninteractive"
     cat -
     echo 'apt-get -yqq autoremove && apt-get -yqq clean'
   } > $script
@@ -47,25 +47,17 @@ build_base(){
   ( debootstrap --help; wget --help; chroot --help ) > /dev/null
   # --variant=minbase
   debootstrap --arch=amd64 $LESSBIAN_DEBIAN_RELEASE $LESSBIAN_MOUNT_TARGET http://ftp.us.debian.org/debian/
-
-  echo "apt-get -y install ca-certificates" | run_in_chroot "Prepare step 1"
-
+  run_in_chroot "_step1" < <(get_file base/_step1.sh)
   get_file debian-releases/$LESSBIAN_DEBIAN_RELEASE-sources.list > $LESSBIAN_MOUNT_TARGET/etc/apt/sources.list
-
-  echo "\
-apt-get -yqq update
-apt-get -yqq install locales
-sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
-dpkg-reconfigure --frontend=noninteractive locales
-" | run_in_chroot "Prepare step 2"
-
+  run_in_chroot "_step2" < <(get_file base/_step2.sh)
+  run_in_chroot "${LESSBIAN_DEBIAN_RELEASE}-NOX" < <(get_file base/nox.sh)
   run_in_chroot "${LESSBIAN_DEBIAN_RELEASE}-NOX" < <(get_file base/nox.sh)
   [ "x$1" == "xy" ] &&\
     { DIR=$(pwd); cd $LESSBIAN_MOUNT_TARGET && tar czf $DIR/NOX.tar.gz . && cd $DIR; }
-
   run_in_chroot "${LESSBIAN_DEBIAN_RELEASE}-X" < <(get_file base/x.sh)
   [ "x$1" == "xy" ] &&\
     { DIR=$(pwd); cd $LESSBIAN_MOUNT_TARGET && tar czf $DIR/X.tar.gz . && cd $DIR; }
+  [ "x$1" == "xy" ] && rm -rf $LESSBIAN_MOUNT_TARGET/
 }
 export -f get_file exit_script build_base run_in_chroot
 
@@ -81,20 +73,24 @@ fi
 
 
 if [ ! "x$LESSBIAN_JUST_BASE" == x ]; then
-  [ "x$LESSBIAN_MOUNT_TARGET == x" ] && export LESSBIAN_MOUNT_TARGET=/mnt
-  mkdir -p $LESSBIAN_MOUNT_TARGET
+  [ "x$LESSBIAN_MOUNT_TARGET == x" ] || [ ! -d $LESSBIAN_MOUNT_TARGET ] && exit 1
   build_base y
   exit_script
 fi
 
 
+(grub-install --help; wget --help; chroot --help) > /dev/null
+
+
 if [ ! -f variant.sh ]; then
-  IFS=$'\n' read -d '' -r -a variants < <(get_file variants/_list | cut -d'.' -f1 && printf '\0')
-  for (( i=0; i<${#variants[@]}; i++ )); do
-    printf "%2s  %s\n" "$i" "${variants[$i]}"
-  done
-  read -p "Choose variant [0]: " variant
-  export LESSBIAN_VARIANT=${variants[${variant:-0}]}
+  if [ "x$LESSBIAN_VARIANT" == x ]; then
+    IFS=$'\n' read -d '' -r -a variants < <(get_file variants/_list | cut -d'.' -f1 && printf '\0')
+    for (( i=0; i<${#variants[@]}; i++ )); do
+      printf "%2s  %s\n" "$i" "${variants[$i]}"
+    done
+    read -p "Choose variant [0]: " variant
+    export LESSBIAN_VARIANT=${variants[${variant:-0}]}
+  fi
   echo "export LESSBIAN_DEBIAN_RELEASE=$LESSBIAN_DEBIAN_RELEASE" >> variant.sh
   echo "export LESSBIAN_VARIANT=${variants[${variant:-0}]}" >> variant.sh
   get_file "variants/${LESSBIAN_VARIANT}.sh" >> variant.sh
@@ -139,27 +135,31 @@ if [ "x$LESSBIAN_HOSTNAME" == x ]; then
 fi
 
 
-base_file=base-${LESSBIAN_BASE}.tar.gz
-if [ ! -f base-$base_file ]; then
-  read -p "Base file not found. Input anything to build a fresh base or nothing to download: " get_base
-  if [ "x$get_base" == x ]; then
-    wget $LESSBIAN_BASE_URL/$LESSBIAN_DEBIAN_RELEASE/$base_file 2> >(\
-      grep ERROR && echo "$LESSBIAN_BASE_URL/$LESSBIAN_DEBIAN_RELEASE/$base_file" && exit_script \
-    )
+if [ ! "x$LESSBIAN_BASE_FRESH" == xy ]; then
+  base_file=base-${LESSBIAN_BASE}.tar.gz
+  if [ ! -f base-$base_file ]; then
+    read -p "Base file not found. Input anything to build a fresh base or nothing to download: " get_base
+    if [ "x$get_base" == x ]; then
+      wget $LESSBIAN_BASE_URL/$LESSBIAN_DEBIAN_RELEASE/$base_file 2> >(\
+        grep ERROR && echo "$LESSBIAN_BASE_URL/$LESSBIAN_DEBIAN_RELEASE/$base_file" && exit_script \
+      )
+      cat $base_file | tar xzf - -C $LESSBIAN_MOUNT_TARGET
+    else
+      export LESSBIAN_BASE_FRESH=y
+    fi
   else
-    build_base
+    export LESSBIAN_BASE_FRESH=n
   fi
 fi
-
 
 exit_script
 
 
 
-(grub-install --help; wget --help; chroot --help) > /dev/null
+
 
 mkdir -p $MNT; mount $DEV $MNT
-cat ${LESSBIAN_BASE}.tar.gz | tar xzf - -C $MNT
+
 
 mkdir $MNT/_host; mount -B / $MNT/_host
 mount -t proc /proc $MNT/proc; mount -t sysfs /sys $MNT/sys; mount -B /dev $MNT/dev
