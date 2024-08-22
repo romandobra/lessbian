@@ -57,7 +57,7 @@ build_base(){
   run_in_chroot "${LESSBIAN_DEBIAN_RELEASE}-X" < <(get_file base/x.sh)
   [ "x$1" == "xy" ] &&\
     { DIR=$(pwd); cd $LESSBIAN_MOUNT_TARGET && tar czf $DIR/X.tar.gz . && cd $DIR; }
-  [ "x$1" == "xy" ] && rm -rf $LESSBIAN_MOUNT_TARGET/
+  [ "x$1" == "xy" ] && rm -rf $LESSBIAN_MOUNT_TARGET/*
   echo "Base built"
 }
 export -f get_file exit_script build_base run_in_chroot
