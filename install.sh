@@ -74,7 +74,7 @@ fi
 
 
 if [ ! "x$LESSBIAN_JUST_BASE" == x ]; then
-  [ "x$LESSBIAN_MOUNT_TARGET == x" ] || [ ! -d $LESSBIAN_MOUNT_TARGET ] && exit 1
+  [ "x$LESSBIAN_MOUNT_TARGET == x" ] || [ -d $LESSBIAN_MOUNT_TARGET ] || exit 1
   build_base y
   exit_script
 fi
