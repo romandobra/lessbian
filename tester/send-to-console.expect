@@ -1,0 +1,36 @@
+#!/usr/bin/expect -f
+set timeout -1
+
+spawn virsh -c qemu:///system console vm1
+
+expect "Connected"
+send "\r"
+
+expect "debian-live login: "
+send "root\r"
+
+expect "Password: "
+send "toor\r"
+
+expect "Last login: "
+expect "# "
+
+while {[gets stdin line] != -1} {
+    send "$line\r"
+    expect "root@debian-live:"
+}
+send \004
+
+
+expect "lessbian-tester login: "
+send "root\r"
+
+expect "Last login: "
+expect "root@debian-live:"
+
+send "exit\r"
+
+expect "logout"
+
+send "\x1b\r"
+
