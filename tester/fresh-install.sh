@@ -11,6 +11,7 @@ EOF
 mkfs.ext4 /dev/sda1
 
 export DEBCONF_FRONTEND=noninteractive
+apt-get -yqq update
 apt-get -yqq install debootrstrap grub2
 
 sleep 1
