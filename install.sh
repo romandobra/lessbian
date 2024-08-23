@@ -28,6 +28,8 @@ exit_script(){
 run_in_chroot(){
   local script="$LESSBIAN_MOUNT_TARGET/chroot_script.sh"
   {
+    echo "#!/usr/bin/env bash"
+    echo; echo "set -e"
     echo "echo Running '$1' in chroot && export DEBIAN_FRONTEND=noninteractive"
     echo "err_trap() { read -p '$1 Line \$1'; }"
     echo "trap 'err_trap \$LINENO' ERR"
