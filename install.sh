@@ -179,6 +179,16 @@ update-grub" | run_in_chroot "_step3"
 
 
 grub-install --root-directory=$LESSBIAN_MOUNT_TARGET "${LESSBIAN_INSTALL_DEV%[0-9]}"
+
+
+{
+  echo '---- variant.sh'
+  cat variant.sh
+  echo '---- env'
+  ( set -o posix; set ) | grep LESSBIAN
+} > $LESSBIAN_MOUNT_TARGET/var/log/lessbian/install.log
+
+
 umount $LESSBIAN_MOUNT_TARGET
 
 
