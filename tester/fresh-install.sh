@@ -2,6 +2,10 @@
 
 set -e
 
+export DEBCONF_FRONTEND=noninteractive
+apt-get -y update
+apt-get -y install debootrstrap grub2
+
 fdisk /dev/sda <<EOF
 n
 p
@@ -13,10 +17,6 @@ q
 EOF
 
 mkfs.ext4 /dev/sda1
-
-export DEBCONF_FRONTEND=noninteractive
-apt-get -yqq update
-apt-get -yqq install debootrstrap grub2
 
 sleep 1
 export LESSBIAN_DEBIAN_RELEASE=buster
