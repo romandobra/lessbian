@@ -4,7 +4,7 @@ set -e
 
 export DEBCONF_FRONTEND=noninteractive
 apt-get -y update
-apt-get -y install debootrstrap grub2
+apt-get -y install debootstrap grub2
 
 fdisk /dev/sda <<EOF
 n
