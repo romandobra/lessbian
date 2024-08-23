@@ -43,9 +43,9 @@ run_in_chroot(){
   mount -o bind /sys $LESSBIAN_MOUNT_TARGET/sys
   chroot $LESSBIAN_MOUNT_TARGET /chroot_script.sh
   echo Unmounting dev, proc, sys
-  umount $LESSBIAN_MOUNT_TARGET/proc || sleep 10 && umount -lf $LESSBIAN_MOUNT_TARGET/proc
-  umount $LESSBIAN_MOUNT_TARGET/dev || sleep 10 && umount -lf $LESSBIAN_MOUNT_TARGET/dev
-  umount $LESSBIAN_MOUNT_TARGET/sys || sleep 10 && umount -lf $LESSBIAN_MOUNT_TARGET/sys
+  umount $LESSBIAN_MOUNT_TARGET/proc || sleep 10 && umount -lf $LESSBIAN_MOUNT_TARGET/proc || true
+  umount $LESSBIAN_MOUNT_TARGET/dev || sleep 10 && umount -lf $LESSBIAN_MOUNT_TARGET/dev || true
+  umount $LESSBIAN_MOUNT_TARGET/sys || sleep 10 && umount -lf $LESSBIAN_MOUNT_TARGET/sys || true
   rm -rf $script
 }
 build_base(){
