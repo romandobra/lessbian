@@ -19,9 +19,10 @@ get_file(){
   fi
 }
 exit_script(){
-  echo '----'
-  # env | grep -E '^LESSBIAN_'
-  ( set -o posix; set ) | grep LESSBIAN
+  {
+    echo "---- $1"
+    ( set -o posix; set ) | grep LESSBIAN
+  } >&2
   exit
 }
 run_in_chroot(){
@@ -44,21 +45,26 @@ run_in_chroot(){
   rm -rf $script
 }
 build_base(){
+  [ "x$1" == x ] && exit_script "Usage: build_base NOX|X [y]"
   ( debootstrap --help; wget --help; chroot --help ) > /dev/null
   # --variant=minbase
   debootstrap --arch=amd64 $LESSBIAN_DEBIAN_RELEASE $LESSBIAN_MOUNT_TARGET http://ftp.us.debian.org/debian/
   run_in_chroot "_step1" < <(get_file base/_step1.sh)
   get_file debian-releases/$LESSBIAN_DEBIAN_RELEASE-sources.list > $LESSBIAN_MOUNT_TARGET/etc/apt/sources.list
   run_in_chroot "_step2" < <(get_file base/_step2.sh)
-  run_in_chroot "${LESSBIAN_DEBIAN_RELEASE}-NOX" < <(get_file base/nox.sh)
-  run_in_chroot "${LESSBIAN_DEBIAN_RELEASE}-NOX" < <(get_file base/nox.sh)
-  [ "x$1" == "xy" ] &&\
+
+  run_in_chroot "${LESSBIAN_DEBIAN_RELEASE}-NOX" < <(get_file base/NOX.sh)
+  [ "x$2" == "xy" ] &&\
     { DIR=$(pwd); cd $LESSBIAN_MOUNT_TARGET && tar czf $DIR/NOX.tar.gz . && cd $DIR; }
-  run_in_chroot "${LESSBIAN_DEBIAN_RELEASE}-X" < <(get_file base/x.sh)
-  [ "x$1" == "xy" ] &&\
-    { DIR=$(pwd); cd $LESSBIAN_MOUNT_TARGET && tar czf $DIR/X.tar.gz . && cd $DIR; }
-  [ "x$1" == "xy" ] && rm -rf $LESSBIAN_MOUNT_TARGET/*
-  echo "Base built"
+
+  if [ "x$1" == xX ]; then
+    run_in_chroot "${LESSBIAN_DEBIAN_RELEASE}-X" < <(get_file base/X.sh)
+    [ "x$2" == "xy" ] &&\
+      { DIR=$(pwd); cd $LESSBIAN_MOUNT_TARGET && tar czf $DIR/X.tar.gz . && cd $DIR; }
+  fi
+
+  [ "x$2" == "xy" ] && rm -rf $LESSBIAN_MOUNT_TARGET/*
+  echo "Base built" >&2
 }
 export -f get_file exit_script build_base run_in_chroot
 
@@ -75,7 +81,7 @@ fi
 
 if [ ! "x$LESSBIAN_JUST_BASE" == x ]; then
   [ "x$LESSBIAN_MOUNT_TARGET == x" ] || [ -d $LESSBIAN_MOUNT_TARGET ] || exit 1
-  build_base y
+  build_base X y
   exit_script
 fi
 
@@ -136,9 +142,15 @@ if [ "x$LESSBIAN_HOSTNAME" == x ]; then
 fi
 
 
-if [ ! "x$LESSBIAN_BASE_FRESH" == xy ]; then
+mkdir -p $LESSBIAN_MOUNT_TARGET
+mount $LESSBIAN_INSTALL_DEV $LESSBIAN_MOUNT_TARGET
+
+
+if [ "x$LESSBIAN_BASE_FRESH" == xy ]; then
+  build_base $LESSBIAN_BASE
+else
   base_file=base-${LESSBIAN_BASE}.tar.gz
-  if [ ! -f base-$base_file ]; then
+  if [ ! -f $base_file ]; then
     read -p "Base file not found. Input anything to build a fresh base or nothing to download: " get_base
     if [ "x$get_base" == x ]; then
       wget $LESSBIAN_BASE_URL/$LESSBIAN_DEBIAN_RELEASE/$base_file 2> >(\
@@ -146,46 +158,24 @@ if [ ! "x$LESSBIAN_BASE_FRESH" == xy ]; then
       )
       cat $base_file | tar xzf - -C $LESSBIAN_MOUNT_TARGET
     else
-      export LESSBIAN_BASE_FRESH=y
+      build_base $LESSBIAN_BASE
     fi
-  else
-    export LESSBIAN_BASE_FRESH=n
   fi
 fi
 
+
+for i in part-*.sh; do
+  cat $i | run_in_chroot "$i"
+done
+
+
+echo "apt-get -yqq install grub2
+#grub-mkconfig -o /boot/grub/grub.cfg
+update-grub" | run_in_chroot "_step3"
+
+
+grub-install --root-directory=$LESSBIAN_MOUNT_TARGET "${LESSBIAN_INSTALL_DEV%[0-9]}"
+umount $LESSBIAN_MOUNT_TARGET
+
+
 exit_script
-
-
-
-
-
-mkdir -p $MNT; mount $DEV $MNT
-
-
-mkdir $MNT/_host; mount -B / $MNT/_host
-mount -t proc /proc $MNT/proc; mount -t sysfs /sys $MNT/sys; mount -B /dev $MNT/dev
-
-{
-  echo -n '#INSTALL '
-  date +%s
-  ( set -o posix; set ) | grep LESSBIAN
-  echo
-} > $MNT/etc/lessbian-env
-
-for i in part*; do
-  cp $i $MNT/s
-  chroot $MNT bash /s
-  rm $MNT/s
-done || true
-
-chroot $MNT apt-get -y install grub2
-chroot $MNT apt-get -y autoremove
-chroot $MNT apt-get clean
-#chroot $MNT grub-mkconfig -o /boot/grub/grub.cfg
-chroot $MNT update-grub
-
-umount -fR $MNT/proc; umount -fR $MNT/sys; umount -flR $MNT/dev
-umount -fR $MNT/_host; rmdir $MNT/_host
-
-grub-install --root-directory=$MNT "${DEV%[0-9]}"
-umount -fR $MNT
