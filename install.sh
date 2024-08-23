@@ -46,6 +46,10 @@ run_in_chroot(){
 }
 build_base(){
   [ "x$1" == x ] && exit_script "Usage: build_base NOX|X [y]"
+  [ "x$LESSBIAN_MOUNT_TARGET == x" ]\
+    || [ -d $LESSBIAN_MOUNT_TARGET ]\
+    || exit_script "Bad mount target '$LESSBIAN_MOUNT_TARGET'"
+
   ( debootstrap --help; wget --help; chroot --help ) > /dev/null
   # --variant=minbase
   debootstrap --arch=amd64 $LESSBIAN_DEBIAN_RELEASE $LESSBIAN_MOUNT_TARGET http://ftp.us.debian.org/debian/
@@ -80,7 +84,6 @@ fi
 
 
 if [ ! "x$LESSBIAN_JUST_BASE" == x ]; then
-  [ "x$LESSBIAN_MOUNT_TARGET == x" ] || [ -d $LESSBIAN_MOUNT_TARGET ] || exit_script "Bad mount target '$LESSBIAN_MOUNT_TARGET'"
   build_base X y
   exit_script
 fi
