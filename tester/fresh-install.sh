@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
 fdisk /dev/sda <<EOF
 n
 p
