@@ -1,5 +1,4 @@
 deb https://deb.debian.org/debian buster main contrib non-free
-deb-src https://deb.debian.org/debian buster main contrib non-free
 deb https://deb.debian.org/debian buster-updates main contrib non-free
-deb-src https://deb.debian.org/debian buster-updates main contrib non-free
-deb https://security.debian.org/debian-security buster-security main
+#deb http://archive.debian.org/debian buster-backports main contrib non-free
+deb http://security.debian.org/debian-security/ buster/updates main contrib non-free
