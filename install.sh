@@ -80,7 +80,7 @@ fi
 
 
 if [ ! "x$LESSBIAN_JUST_BASE" == x ]; then
-  [ "x$LESSBIAN_MOUNT_TARGET == x" ] || [ -d $LESSBIAN_MOUNT_TARGET ] || exit 1
+  [ "x$LESSBIAN_MOUNT_TARGET == x" ] || [ -d $LESSBIAN_MOUNT_TARGET ] || exit_script "Bad mount target '$LESSBIAN_MOUNT_TARGET'"
   build_base X y
   exit_script
 fi
@@ -124,7 +124,7 @@ fi
 if [ "x$LESSBIAN_INSTALL_DEV" == x ]; then
   lsblk | grep part
   read -p "Device to install to (You have to set the boot flag manually): /dev/" dev
-  [ "x$dev" == x ] || [ ! -e "/dev/$dev" ] && exit 1
+  [ "x$dev" == x ] || [ ! -e "/dev/$dev" ] && exit_script "Bad install device '$LESSBIAN_INSTALL_DEV'"
   export LESSBIAN_INSTALL_DEV="/dev/$dev"
 fi
 
