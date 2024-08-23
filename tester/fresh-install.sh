@@ -1,4 +1,13 @@
-fdisk /dev/sda
+fdisk /dev/sda <<EOF
+n
+p
+
+
+
+w
+q
+EOF
+
 mkfs.ext4 /dev/sda1
 
 export DEBCONF_FRONTEND=noninteractive
