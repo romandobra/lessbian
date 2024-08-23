@@ -172,7 +172,8 @@ for i in part-*.sh; do
 done
 
 
-echo "apt-get -yqq install grub2
+echo "echo '$LESSBIAN_HOSTNAME' > /etc/hostname
+apt-get -yqq install grub2
 #grub-mkconfig -o /boot/grub/grub.cfg
 update-grub" | run_in_chroot "_step3"
 
