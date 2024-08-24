@@ -29,7 +29,8 @@ run_in_chroot(){
   local script="$LESSBIAN_MOUNT_TARGET/chroot_script.sh"
   {
     echo "#!/usr/bin/env bash"
-    echo; echo "set -e"
+    echo
+#    echo "set -e"
     echo "echo LESSBIAN install.sh: $1"
     echo "export DEBIAN_FRONTEND=noninteractive"
     # echo "err_trap() { read -p '$1 Line \$1'; }"
