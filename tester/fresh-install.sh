@@ -2,6 +2,8 @@
 
 set -e
 
+exec > >(tee fresh-install.log) 2>&1
+
 export DEBCONF_FRONTEND=noninteractive
 apt-get -y update
 apt-get -y install debootstrap grub2
@@ -31,7 +33,6 @@ export LESSBIAN_BASE_FRESH=y
 wget https://raw.githubusercontent.com/romandobra/lessbian/main/install.sh
 
 sleep 1
-exec > >(tee fresh-install.log) 2>&1
 bash install.sh
 
 sleep 1
