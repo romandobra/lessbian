@@ -3,6 +3,11 @@ wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 dpkg -i google-chrome-stable_current_amd64.deb || true
 apt-get --no-install-recommends -y install -f
+
+dpkg -i google-chrome-stable_current_amd64.deb || true
+
+read
+
 rm -rf google-chrome-stable_current_amd64.deb
 
 # TODO maybe sleep 1 here?
