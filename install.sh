@@ -122,6 +122,7 @@ for (( i=0; i<${#LESSBIAN_PARTS[@]}; i++ )); do
     get_file "parts/${LESSBIAN_PARTS[$i]}.sh" > "$file_name"
   fi
 done
+unset LESSBIAN_PARTS
 
 
 if [ "x$LESSBIAN_SKIP_REVIEW" == x ]; then
