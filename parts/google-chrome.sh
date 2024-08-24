@@ -8,6 +8,9 @@ echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'\
 apt-get update
 apt-get -y install google-chrome-stable
 
+sleep 1
+sed -i 's/google-chrome-stable %U/google-chrome-stable --no-first-run %U/' /usr/share/applications/google-chrome.desktop
+
 # read
 
 # 
@@ -21,7 +24,3 @@ apt-get -y install google-chrome-stable
 # read
 
 # rm -rf google-chrome-stable_current_amd64.deb
-
-# # TODO maybe sleep 1 here?
-# # no such file
-# # sed -i 's/google-chrome-stable %U/google-chrome-stable --no-first-run %U/' /usr/share/applications/google-chrome.desktop
