@@ -106,7 +106,7 @@ if [ ! -f variant.sh ]; then
     export LESSBIAN_VARIANT=${variants[${variant:-0}]}
   fi
   echo "export LESSBIAN_DEBIAN_RELEASE=$LESSBIAN_DEBIAN_RELEASE" >> variant.sh
-  echo "export LESSBIAN_VARIANT=${variants[${variant:-0}]}" >> variant.sh
+  echo "export LESSBIAN_VARIANT=$LESSBIAN_VARIANT" >> variant.sh
   get_file "variants/${LESSBIAN_VARIANT}.sh" >> variant.sh
 fi
 source variant.sh
