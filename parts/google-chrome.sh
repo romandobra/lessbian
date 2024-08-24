@@ -5,4 +5,6 @@ dpkg -i google-chrome-stable_current_amd64.deb || true
 apt-get --no-install-recommends -y install -f
 rm -rf google-chrome-stable_current_amd64.deb
 
-sed -i 's/google-chrome-stable %U/google-chrome-stable --no-first-run %U/' /usr/share/applications/google-chrome.desktop
+# TODO maybe sleep 1 here?
+# no such file
+# sed -i 's/google-chrome-stable %U/google-chrome-stable --no-first-run %U/' /usr/share/applications/google-chrome.desktop
