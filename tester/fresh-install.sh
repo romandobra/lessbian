@@ -21,7 +21,7 @@ EOF
 mkfs.ext4 /dev/sda1
 
 sleep 1
-export LESSBIAN_DEBIAN_RELEASE=buster
+export LESSBIAN_DEBIAN_RELEASE=bullseye
 export LESSBIAN_VARIANT=x-0
 #export LESSBIAN_JUST_BASE=y
 export LESSBIAN_SKIP_REVIEW=y
