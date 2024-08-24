@@ -149,11 +149,6 @@ if [ "x$LESSBIAN_HOSTNAME" == x ]; then
 fi
 
 
-mkdir -p $LESSBIAN_MOUNT_TARGET/var/log/lessbian
-export LESSBIAN_LOG_FILE=$LESSBIAN_MOUNT_TARGET/var/log/lessbian/install.log
-exec > >(tee $LESSBIAN_LOG_FILE) 2>&1
-
-
 mkdir -p $LESSBIAN_MOUNT_TARGET
 mount /dev/$LESSBIAN_INSTALL_DEV $LESSBIAN_MOUNT_TARGET
 
@@ -195,7 +190,8 @@ grub-install --root-directory=$LESSBIAN_MOUNT_TARGET /dev/${LESSBIAN_INSTALL_DEV
   cat variant.sh
   echo '---- env'
   ( set -o posix; set ) | grep LESSBIAN
-} >> $LESSBIAN_LOG_FILE
+  echo '----'
+} >> $LESSBIAN_MOUNT_TARGET/var/log/lessbian/install.sh.log
 
 
 umount $LESSBIAN_MOUNT_TARGET
