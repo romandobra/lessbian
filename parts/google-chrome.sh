@@ -1,3 +1,5 @@
+chmod -x $(type -p gnome-keyring-daemon)
+
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 
 echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'\
@@ -8,7 +10,7 @@ apt-get -y install google-chrome-stable
 
 # read
 
-# chmod -x $(type -p gnome-keyring-daemon)
+# 
 # wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
 # wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 # dpkg -i google-chrome-stable_current_amd64.deb || true
