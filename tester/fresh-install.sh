@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+#set -e
 
 exec > >(tee lessbian-fresh-install.log) 2>&1
 
