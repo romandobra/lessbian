@@ -186,12 +186,11 @@ grub-install --root-directory=$LESSBIAN_MOUNT_TARGET /dev/${LESSBIAN_INSTALL_DEV
 
 
 {
-  echo '---- variant.sh'
+  echo '#---- variant.sh'
   cat variant.sh
-  echo '---- env'
+  echo '#---- env'
   ( set -o posix; set ) | grep LESSBIAN
-  echo '----'
-} >> $LESSBIAN_MOUNT_TARGET/var/log/lessbian/install.sh.log
+} >> $LESSBIAN_MOUNT_TARGET/etc/lessbian.env
 
 
 umount $LESSBIAN_MOUNT_TARGET
