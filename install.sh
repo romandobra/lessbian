@@ -149,7 +149,7 @@ if [ "x$LESSBIAN_HOSTNAME" == x ]; then
 fi
 
 
-mkdir -p LESSBIAN_MOUNT_TARGET/var/log/lessbian
+mkdir -p $LESSBIAN_MOUNT_TARGET/var/log/lessbian
 export LESSBIAN_LOG_FILE=$LESSBIAN_MOUNT_TARGET/var/log/lessbian/install.log
 exec > >(tee $LESSBIAN_LOG_FILE) 2>&1
 
