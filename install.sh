@@ -106,8 +106,8 @@ if [ ! -f variant.sh ]; then
     read -p "Choose variant [0]: " variant
     export LESSBIAN_VARIANT=${variants[${variant:-0}]}
   fi
-  echo "export LESSBIAN_DEBIAN_RELEASE=$LESSBIAN_DEBIAN_RELEASE" >> variant.sh
-  echo "export LESSBIAN_VARIANT=$LESSBIAN_VARIANT" >> variant.sh
+  echo "LESSBIAN_DEBIAN_RELEASE=$LESSBIAN_DEBIAN_RELEASE" >> variant.sh
+  echo "LESSBIAN_VARIANT=$LESSBIAN_VARIANT" >> variant.sh
   get_file "variants/${LESSBIAN_VARIANT}.sh" >> variant.sh
 fi
 source variant.sh
@@ -187,9 +187,6 @@ grub-install --root-directory=$LESSBIAN_MOUNT_TARGET /dev/${LESSBIAN_INSTALL_DEV
 
 
 {
-  echo '#---- variant.sh'
-  cat variant.sh
-  echo '#---- env'
   ( set -o posix; set ) | grep LESSBIAN
 } >> $LESSBIAN_MOUNT_TARGET/etc/lessbian.env
 
