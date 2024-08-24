@@ -2,7 +2,7 @@
 
 set -e
 
-exec > >(tee fresh-install.log) 2>&1
+exec > >(tee lessbian-fresh-install.log) 2>&1
 
 export DEBCONF_FRONTEND=noninteractive
 apt-get -y update
@@ -36,3 +36,6 @@ sleep 1
 bash install.sh
 
 sleep 1
+mount /dev/sda1 /mnt
+mv lessbian-fresh-install.log /mnt/var/log/
+umount /mnt
