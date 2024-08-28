@@ -22,7 +22,7 @@ mkfs.ext4 /dev/sda1
 
 sleep 1
 export LESSBIAN_DEBIAN_RELEASE=bookworm
-export LESSBIAN_VARIANT=x-0
+export LESSBIAN_VARIANT=x-1
 #export LESSBIAN_JUST_BASE=y
 export LESSBIAN_SKIP_REVIEW=y
 export LESSBIAN_INSTALL_DEV=sda1
