@@ -185,7 +185,7 @@ apt-get -yqq install grub2
 update-grub" | run_in_chroot "_step3"
 
 
-grub-install --root-directory=$LESSBIAN_MOUNT_TARGET /dev/${LESSBIAN_INSTALL_DEV%[0-9]}
+grub-install --root-directory=$LESSBIAN_MOUNT_TARGET ${LESSBIAN_INSTALL_DEV%[0-9]}
 
 
 {
