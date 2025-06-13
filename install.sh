@@ -180,6 +180,7 @@ done
 
 
 echo "echo '$LESSBIAN_HOSTNAME' > /etc/hostname
+echo 127.0.1.1 '$LESSBIAN_HOSTNAME' >> /etc/hosts
 apt-get -yqq install grub2
 #grub-mkconfig -o /boot/grub/grub.cfg
 update-grub" | run_in_chroot "_step3"
