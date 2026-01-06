@@ -1,0 +1,4 @@
+buster
+bullseye
+bookworm
+trixie

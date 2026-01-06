@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+debootstrap --arch=amd64\
+  $LESSBIAN_DR\
+  $LESSBIAN_MNT\
+  http://ftp.us.debian.org/debian/

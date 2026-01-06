@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+run_in_chroot\
+  data/base/steps/chroot/1-pre-$LESSBIAN_DR.sh

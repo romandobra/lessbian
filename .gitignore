@@ -1,4 +1,3 @@
 variant.sh
 part-*
-X.tar.gz
-NOX.tar.gz
+_*

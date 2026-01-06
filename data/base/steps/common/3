@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+cat data/base/sources-lists/$LESSBIAN_DR.list\
+  > $LESSBIAN_MNT/etc/apt/sources.list
+
+run_in_chroot data/base/steps/chroot/NOX.sh
