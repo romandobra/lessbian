@@ -50,6 +50,7 @@ run_in_chroot(){
     echo "export DEBIAN_FRONTEND=noninteractive"
     cat $1
     echo
+    echo "apt-get -yqq update --fix-missing"
     echo "apt-get -yqq autoremove && apt-get -yqq clean"
   } > $script
   chmod +x $script
