@@ -14,6 +14,10 @@ I wanted a Linux system that:
 - can easily boot from USB
 - can boot to the RAM.
 
+# Progress since simplify
+
+1. Base builds for trixie, bullseye and bookworm
+
 Enjoy and ...
 
 # Give a star to this repo!
