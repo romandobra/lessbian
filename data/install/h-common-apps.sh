@@ -1,5 +1,6 @@
 apt-get --no-install-recommends -y install\
 	debootstrap\
+	grub2\
 	eject\
 	dosfstools\
 	mtools\
