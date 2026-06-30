@@ -40,7 +40,7 @@ Used in both scripts.
 3. You have to cleanup your drive and set the boot flag manually.
 4. Overlay is configured to run from RAM by default (`data/install/b-overlay.sh`).
 5. If you choose GUI apps, you better unpack `X.tar.gz` instaead of `NOX.tar.gz`.
-6. After running `_install/run.sh` it's safe to delete `_base/` and `_install/`.
+6. After running `_install/run.sh` it's safe to delete `_base/` and `_install/` or keep `_base` until some breaking changes in Debian.
 
 ## Progress since simplify
 
