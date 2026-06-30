@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-apt-get -yqq install software-properties-common
+apt-get -y install software-properties-common
 apt-get -y install ca-certificates
 
 apt-get -y install locales

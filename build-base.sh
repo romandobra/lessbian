@@ -10,6 +10,7 @@ source functions.sh
 
 report_step(){
   echo_script "$1 $2"
+  mkdir -p $LESSBIAN_MNT/etc
   echo "export LESSBIAN_BASE_${1}_STEP=$2"\
     >> $LESSBIAN_MNT/etc/lessbian.env\
     || true; }
