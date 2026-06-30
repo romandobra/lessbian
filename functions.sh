@@ -5,7 +5,7 @@ set -e
 
 exit_script(){
   echo_script "! $1"
-  echo_script "-"
+  echo_script "--- LESSBIAN vars:"
   echo_script "$(( set -o posix; set ) | grep LESSBIAN)"
   exit $2; }
 
