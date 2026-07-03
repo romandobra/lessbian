@@ -13,4 +13,5 @@ apt-get --no-install-recommends -y install\
 	ncdu\
 	unar\
 	dialog\
-	nmap
+	nmap\
+	usbutils
