@@ -9,6 +9,7 @@ PowerKeyIgnoreInhibited=yes
 SuspendKeyIgnoreInhibited=yes
 HibernateKeyIgnoreInhibited=yes
 LidSwitchIgnoreInhibited=yes
-IdleAction=ignore' > /etc/systemd/logind.conf
+IdleAction=ignore
+KillUserProcesses=yes' > /etc/systemd/logind.conf
 
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target

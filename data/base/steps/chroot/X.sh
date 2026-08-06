@@ -4,7 +4,8 @@
 
 apt-get -y install gnome-session
 apt-get -y --purge remove plymouth yelp
-apt-get --no-install-recommends -y install gnome-terminal sudo
+apt-get --no-install-recommends -y install gnome-terminal xdg-desktop-portal xdg-desktop-portal-gnome xdg-utils dbus-x11 ripgrep sudo
+
 adduser --disabled-password --gecos "" user
 passwd -d user
 adduser user sudo
